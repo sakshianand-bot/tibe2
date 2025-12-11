@@ -276,11 +276,13 @@ const Home = () => {
             {/* Right Side - CTA Card */}
             <div className="relative px-6 sm:px-8 md:px-12 animate-slide-up" style={{ animationDelay: '200ms' }}>
               <div className="bg-card rounded-2xl shadow-2xl overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1554224155-3a58922a22c3?w=800&q=80"
-                  alt="Claim Your Surplus Funds"
-                  className="w-full h-64 object-cover"
-                />
+                <div className="relative w-full h-80 overflow-visible">
+                  <img
+                    src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80"
+                    alt="Legal Fund Recovery Services"
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
                 <div className="p-6">
                   <button
                     onClick={() => setShowModal(true)}

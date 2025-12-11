@@ -124,7 +124,7 @@ const Testimonials = () => {
           <div className="space-y-6">
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="grid md:grid-cols-3 gap-4 p-6">
+                <div className="grid md:grid-cols-1 gap-4 p-6">
                   {/* Author Info - Left Column */}
                   <div className="md:col-span-1">
                     <div className="flex items-center gap-4">
@@ -144,96 +144,23 @@ const Testimonials = () => {
                         </div>
                       </div>
                     </div>
-                    
-                    <div className="mt-4 space-y-3">
-                      <div className="p-3 bg-gray-700/50 rounded-xl border border-gray-600/50">
-                        <div className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">
-                          Amount Recovered
-                        </div>
-                        <div className="text-2xl font-bold text-sky-400">{testimonial.amount}</div>
-                      </div>
-                      
-                      <div className="p-3 bg-gray-700/50 rounded-xl border border-gray-600/50">
-                        <div className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">
-                          Claim Type
-                        </div>
-                        <div className="text-sm font-semibold text-gray-100">{testimonial.type}</div>
-                      </div>
-                    </div>
                   </div>
 
-                  {/* Testimonial Content - Middle Column */}
-                  <div className="md:col-span-2">
+                  {/* Testimonial Content */}
+                  <div className="col-span-1">
                     <div className="relative h-full">
                       <Quote className="absolute -top-2 -left-2 w-8 h-8 text-gray-700 opacity-50" />
                       <div className="pl-4">
                         <h3 className="text-xl font-bold text-white mb-3">
                           {testimonial.title}
                         </h3>
-                        <p className="text-sm text-gray-300 leading-relaxed mb-4 line-clamp-3">
+                        <p className="text-sm text-gray-300 leading-relaxed line-clamp-4">
                           {testimonial.content}
                         </p>
-                        
-                        <div className="flex flex-wrap items-center gap-4 mt-4 pt-4 border-t border-gray-700/50">
-                          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/10 rounded-lg">
-                            <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span className="text-sm font-medium text-green-400">
-                              Successfully recovered
-                            </span>
-                          </div>
-                          
-                          <div className="text-sm text-gray-400">
-                            <span className="font-medium text-gray-300">{testimonial.duration}</span>
-                          </div>
-                          
-                          <div className="text-sm text-gray-400 ml-auto">
-                            <span className="font-medium text-sky-300">30% contingency fee</span>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Additional Info - Right Column */}
-                  <div className="md:col-span-1 lg:block hidden">
-                    <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/90 rounded-xl p-4 border border-gray-700/50 backdrop-blur-sm h-full shadow-lg">
-                      <div className="text-center">
-                        <div className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
-                          Recovery Timeline
-                        </div>
-                        <div className="relative pt-4">
-                          <div className="w-full h-2 bg-gray-600 rounded-full overflow-hidden">
-                            <div 
-                              className="h-full bg-gradient-to-r from-sky-400 to-sky-500 rounded-full"
-                              style={{ width: '85%' }}
-                            ></div>
-                          </div>
-                          <div className="text-lg font-bold text-white mt-2">
-                            {testimonial.duration.split(' ')[0]} months
-                          </div>
-                          <div className="text-xs text-gray-400 mt-1">
-                            Average time for similar claims
-                          </div>
-                        </div>
-                        
-                        <div className="p-3 bg-gray-700/50 rounded-lg border border-gray-600/50">
-                          <div className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">
-                            Client Net Received
-                          </div>
-                          <div className="text-xl font-bold text-green-300">
-                            {(() => {
-                              const amount = parseFloat(testimonial.amount.replace(/[^0-9.-]+/g, ""));
-                              const net = amount * 0.7;
-                              return `$${net.toLocaleString()}`;
-                            })()}
-                          </div>
-                          <div className="text-xs text-gray-400 mt-1">
-                            After our 30% fee
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             ))}

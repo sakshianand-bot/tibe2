@@ -31,7 +31,7 @@ const HowItWorks = () => {
       title: "We Research & Locate",
       description: "We audit foreclosure and tax-sale records nationwide to find properties sold for more than what was owed.",
       details: "Using proprietary databases and public records, we identify cases where surplus funds (overage) may exist for former owners or heirs. Our team covers all 50 states, ensuring no potential claim goes unnoticed.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     },
     {
       number: 2,
@@ -39,7 +39,7 @@ const HowItWorks = () => {
       title: "We Verify & Contact You",
       description: "If we find a potential match, we reach out to verify you're the rightful claimant.",
       details: "We check ownership history, liens, and legal eligibility — ensuring there's a valid claim before proceeding. Our verification process protects both you and us from fraudulent claims.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://plus.unsplash.com/premium_photo-1684341008385-31d2eb4f3afe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VmVyaWZ5fGVufDB8fDB8fHww"
     },
     {
       number: 3,
@@ -47,7 +47,7 @@ const HowItWorks = () => {
       title: "We Handle the Paperwork & Legal Filing",
       description: "Our team prepares and files all necessary documents with trustees, courts, or government agencies.",
       details: "We handle the complex legal paperwork, court filings, and communication with agencies. Our network of vetted legal partners ensures everything is filed correctly and efficiently.",
-      image: "https://images.unsplash.com/photo-1589391886085-8b6b0ac72a1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://plus.unsplash.com/premium_photo-1698084059560-9a53de7b816b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF3fGVufDB8fDB8fHww"
     },
     {
       number: 4,
