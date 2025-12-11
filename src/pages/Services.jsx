@@ -48,7 +48,8 @@ const Services = () => {
         "Beneficiary verification",
         "Probate claim support"
       ],
-      icon: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      icon: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
+      backgroundPosition: "center 50%"
     },
     {
       title: "Estate & Probate Assistance",
@@ -59,7 +60,7 @@ const Services = () => {
         "Estate claim facilitation",
         "Document coordination"
       ],
-      icon: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      icon: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Free Case Evaluation",
@@ -70,7 +71,7 @@ const Services = () => {
         "Recovery potential estimate",
         "Clear action plan"
       ],
-      icon: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=90",
+      icon: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       backgroundPosition: "center 40%"
     }
   ];

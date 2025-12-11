@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Phone, X, CreditCard, Shield, FileText, Users, Award, Zap, Clock, DollarSign, Lock } from 'lucide-react';
+import { ArrowRight, Phone, X, CreditCard, Shield, FileText, Users, Award, Zap, Clock, DollarSign, Lock, User } from 'lucide-react';
 
 const BenefitCard = ({ icon, title, description, image, details }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ const BenefitCard = ({ icon, title, description, image, details }) => {
       {/* Modal Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-primary/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 bg-primary/30 backdrop-blur-lg z-50 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setIsOpen(false)}
         >
           {/* Expanded Card */}
@@ -44,7 +44,7 @@ const BenefitCard = ({ icon, title, description, image, details }) => {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-4 right-4 w-10 h-10 bg-card/90 backdrop-blur-sm rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-card transition-all duration-200"
+                className="absolute top-4 right-4 w-10 h-10 bg-card/90 backdrop-blur-md rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-card transition-all duration-200"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -174,7 +174,7 @@ const Home = () => {
       {/* Consultation Modal */}
       {showModal && (
         <div
-          className="fixed inset-0 bg-primary/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 bg-primary/30 backdrop-blur-lg z-50 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setShowModal(false)}
         >
           <div
@@ -223,7 +223,7 @@ const Home = () => {
               />
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-sky-500 to-sky-600 text-secondary-foreground font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all hover:from-sky-600 hover:to-sky-700 hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full bg-gradient-to-r from-sky-500/90 to-sky-600/90 backdrop-blur-sm text-secondary-foreground font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all hover:from-sky-600/90 hover:to-sky-700/90 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Submit for Free Review
               </button>
@@ -376,6 +376,129 @@ const Home = () => {
               <p className="text-muted-foreground text-sm mt-4">
                 No obligation • 100% confidential • Get results in days
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* New Section: Final CTA with Trust Indicators */}
+      <section className="py-16 bg-gradient-to-b from-white to-sky-50">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Claim What's Yours?</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Join thousands who've successfully recovered their funds with our expert assistance.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                icon: <Clock className="w-10 h-10 text-sky-600 mx-auto mb-4" />,
+                title: "Quick Turnaround",
+                description: "Average claim processing in 30-45 days"
+              },
+              {
+                icon: <Shield className="w-10 h-10 text-sky-600 mx-auto mb-4" />,
+                title: "No Upfront Fees",
+                description: "We only get paid when you get paid"
+              },
+              {
+                icon: <Users className="w-10 h-10 text-sky-600 mx-auto mb-4" />,
+                title: "Dedicated Support",
+                description: "Personal case manager for every client"
+              }
+            ].map((item, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                {item.icon}
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            {/* Button and text removed as requested */}
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories Section */}
+      <section className="py-16 bg-gradient-to-b from-sky-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy-900 mb-4">Success Stories</h2>
+            <p className="text-lg text-navy-700 max-w-3xl mx-auto">
+              Real recoveries for real people across the country
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                amount: "$28,450",
+                location: "Miami, FL",
+                type: "Foreclosure Surplus",
+                story: "After my home was foreclosed, I had no idea I was entitled to surplus funds. Tiberius Strategies recovered $28,450 I didn't know existed!"
+              },
+              {
+                amount: "$42,300",
+                location: "Dallas, TX",
+                type: "Tax Sale Surplus",
+                story: "The team at Tiberius made the entire process simple. They handled all the paperwork and kept me informed every step of the way."
+              },
+              {
+                amount: "$36,750",
+                location: "Atlanta, GA",
+                type: "Foreclosure Surplus",
+                story: "I was skeptical at first, but their no-upfront-fee policy convinced me to try. Best decision ever - they recovered over $36k!"
+              }
+            ].map((story, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all border border-gray-100">
+                <div className="text-gold-600 text-2xl font-bold mb-2">{story.amount}</div>
+                <div className="text-sm text-gray-500 mb-4">{story.location} • {story.type}</div>
+                <p className="text-gray-700 mb-4 italic">"{story.story}"</p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 mr-3">
+                    <User className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="font-medium">Client {index + 1}</div>
+                    <div className="text-sm text-gray-500">Verified Client</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+            <div className="max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-center mb-6">Ready to See If You Qualify?</h3>
+              <div className="grid md:grid-cols-3 gap-6 items-center">
+                <div className="text-center p-4">
+                  <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <FileText className="w-7 h-7 text-sky-600" />
+                  </div>
+                  <h4 className="font-semibold mb-1">1. Submit Your Info</h4>
+                  <p className="text-sm text-gray-600">Quick and secure form</p>
+                </div>
+                <div className="flex justify-center">
+                  <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-600">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-center p-4">
+                  <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Shield className="w-7 h-7 text-sky-600" />
+                  </div>
+                  <h4 className="font-semibold mb-1">2. Free Case Review</h4>
+                  <p className="text-sm text-gray-600">No obligation, 100% confidential</p>
+                </div>
+                {/* Second arrow removed as requested */}
+                <div className="md:col-span-3 text-center">
+                  {/* Button and text removed as requested */}
+                </div>
+              </div>
             </div>
           </div>
         </div>
