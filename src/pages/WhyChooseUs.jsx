@@ -9,35 +9,39 @@ const WhyChooseUs = () => {
       description: "You pay nothing unless we successfully recover funds. We cover all research, filing, and legal costs up front.",
       highlight: "No Recovery, No Fee",
       color: "bg-blue-500",
-      image: "/src/assets/s8.jpg"
+      image: "/images/s8.jpg"
     },
     {
       icon: <Shield className="w-12 h-12 text-sky-500 p-2 bg-sky-50 rounded-full" />,
       title: "Full-Service & Legal Support",
       description: "From claim research to final disbursement, we manage every step — including engaging licensed attorneys when necessary.",
       highlight: "End-to-End Management",
-      color: "bg-blue-600"
+      color: "bg-blue-600",
+      image: "/images/s9.jpg"
     },
     {
       icon: <Globe2 className="w-12 h-12 text-sky-500 p-2 bg-sky-50 rounded-full" />,
       title: "Nationwide Coverage, Local Expertise",
       description: "Whether your property was in Seattle, Florida, California, Texas or elsewhere — our network and experience cover all U.S. states.",
       highlight: "50-State Network",
-      color: "bg-blue-700"
+      color: "bg-blue-700",
+      image: "/images/s10.jpg"
     },
     {
       icon: <Target className="w-12 h-12 text-sky-500 p-2 bg-sky-50 rounded-full" />,
       title: "Transparent & Ethical",
       description: "We believe in clarity and fairness: clear contracts, honest communication, no hidden costs, and full disclosure before you sign.",
       highlight: "No Hidden Fees",
-      color: "bg-blue-500"
+      color: "bg-blue-500",
+      image: "/images/s11.jpg"
     },
     {
       icon: <Users className="w-12 h-12 text-sky-500 p-2 bg-sky-50 rounded-full" />,
       title: "Client-First Approach",
       description: "Personalized attention, regular updates on your case status, and support until funds are safely in your hands.",
       highlight: "Personalized Service",
-      color: "bg-blue-600"
+      color: "bg-blue-600",
+      image: "/images/s1.jpg"
     },
     {
       icon: <Clock className="w-12 h-12 text-sky-500 p-2 bg-sky-50 rounded-full" />,

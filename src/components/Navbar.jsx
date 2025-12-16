@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../routes/routes.config';
-import Logo from '../assets/Tiberius-ezgif.com-png-to-webp-converter.webp';
+import Logo from '/images/Tiberius-ezgif.com-png-to-webp-converter.webp';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

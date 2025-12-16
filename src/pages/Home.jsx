@@ -127,7 +127,7 @@ const Home = () => {
       icon: <Zap className="h-6 w-6" />,
       title: "Fast Processing",
       description: "Quick and efficient processing to get your funds as soon as possible",
-      image: "/src/assets/s4.webp",
+      image: "/images/s4.webp",
       details: [
         "Average processing time of 30-60 days",
         "Expedited handling for urgent cases",
@@ -139,7 +139,7 @@ const Home = () => {
       icon: <Clock className="h-6 w-6" />,
       title: "Paperwork Handled",
       description: "We handle all the complex paperwork and legal procedures",
-      image: "/src/assets/s5.webp",
+      image: "/images/s5.webp",
       details: [
         "Complete document preparation and filing",
         "Court representation when needed",
@@ -151,7 +151,7 @@ const Home = () => {
       icon: <DollarSign className="h-6 w-6" />,
       title: "No Upfront Cost",
       description: "Pay nothing until we successfully recover your funds",
-      image: "/src/assets/s6.webp",
+      image: "/images/s6.webp",
       details: [
         "Zero out-of-pocket expenses",
         "Contingency-based fee structure",
@@ -163,7 +163,7 @@ const Home = () => {
       icon: <Lock className="h-6 w-6" />,
       title: "Bank-Level Security",
       description: "Your information is protected with bank-level security",
-      image: "/src/assets/s7.webp",
+      image: "/images/s7.webp",
       details: [
         "256-bit SSL encryption on all data",
         "Strict confidentiality agreements",
@@ -258,7 +258,7 @@ const Home = () => {
               opacity: 0.9
             }}
           >
-            <source src="/src/assets/sa2.mp4" type="video/mp4" />
+            <source src="/videos/sa2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-gradient-to-br from-sky-200/40 via-sky-300/35 to-sky-400/30" />
@@ -428,7 +428,7 @@ const Home = () => {
             <div className="relative flex items-start justify-center">
               <div className="relative w-full max-w-2xl">
                 <img
-                  src="/src/assets/map-with-american-flag-us-national-loyalty-day-celebration-removebg-preview.png"
+                  src="/images/map-with-american-flag-us-national-loyalty-day-celebration-removebg-preview.png"
                   alt="Nationwide Coverage Map"
                   className="w-full h-auto object-contain scale-110 transform transition-all duration-300 hover:scale-115"
                   style={{
