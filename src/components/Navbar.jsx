@@ -13,7 +13,6 @@ const Navbar = () => {
     { name: 'Why Choose Us', path: ROUTES.PUBLIC.WHY_CHOOSE_US },
     { name: 'FAQ', path: ROUTES.PUBLIC.FAQ },
     { name: 'Testimonials', path: ROUTES.PUBLIC.TESTIMONIALS },
-    { name: 'Resources', path: ROUTES.PUBLIC.RESOURCES },
     { name: 'Contact Us', path: ROUTES.PUBLIC.CONTACT }
   ];
 
