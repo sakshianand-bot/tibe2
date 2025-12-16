@@ -8,7 +8,8 @@ const WhyChooseUs = () => {
       title: "100% Contingency-Based — No Upfront Fees",
       description: "You pay nothing unless we successfully recover funds. We cover all research, filing, and legal costs up front.",
       highlight: "No Recovery, No Fee",
-      color: "bg-blue-500"
+      color: "bg-blue-500",
+      image: "/src/assets/s8.jpg"
     },
     {
       icon: <Shield className="w-12 h-12 text-sky-500 p-2 bg-sky-50 rounded-full" />,
@@ -87,8 +88,17 @@ const WhyChooseUs = () => {
           {differentiators.map((item, index) => (
             <div 
               key={index}
-              className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:bg-gray-50"
+              className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:bg-gray-50 relative flex flex-col"
             >
+              {item.image && (
+                <div className="w-full h-72 bg-gray-100 flex items-center justify-center overflow-hidden p-1">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-full object-contain scale-150"
+                  />
+                </div>
+              )}
               <div className="p-8">
                 <div className="flex items-start gap-6">
                   {/* Icon */}

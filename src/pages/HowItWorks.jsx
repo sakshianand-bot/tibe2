@@ -23,6 +23,13 @@ import {
   Target
 } from 'lucide-react';
 
+// Helper component for alert triangle icon
+const AlertTriangle = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.998-.833-2.732 0L4.342 16.5c-.77.833.192 2.5 1.732 2.5z" />
+  </svg>
+);
+
 const HowItWorks = () => {
   const steps = [
     {
@@ -95,10 +102,26 @@ const HowItWorks = () => {
     transition: { duration: 0.6 }
   };
 
+  // Animation variants for framer-motion
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50/30 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white to-sky-50">
       {/* Hero Section */}
-      <section className="relative py-16 md:py-24 px-4 overflow-hidden">
+      <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-sky-50/30 via-white to-sky-50/20" />
         <div className="max-w-6xl mx-auto relative">
           <div className="text-center max-w-3xl mx-auto">
@@ -214,68 +237,72 @@ const HowItWorks = () => {
 
       {/* How It Works Steps */}
       <section className="py-16 bg-white px-4">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Simple 4-Step Process
+            <span className="inline-block bg-sky-100 text-sky-700 text-sm font-semibold px-4 py-1 rounded-full mb-4">
+              Our Process
+            </span>
+            <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+              Simple 4-Step Recovery Process
             </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              From discovery to disbursement, we handle everything for you
+            <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+              We've streamlined the recovery process to make it as simple and stress-free as possible for you
             </p>
           </div>
 
-          <div className="space-y-12 relative">
-            {/* Vertical Line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-sky-200 via-sky-400 to-sky-100 transform -translate-x-1/2" />
-
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-              >
-                {/* Step Number & Icon */}
-                <div className="md:w-1/2 flex justify-center">
-                  <div className="relative">
-                    <div className="w-24 h-24 bg-gradient-to-br from-sky-100 to-sky-50 rounded-full flex items-center justify-center">
-                      <div className="text-sky-600">
-                        {step.icon}
-                      </div>
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+          <motion.div 
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="relative"
+          >
+            {/* Progress line */}
+            <div className="hidden md:block absolute top-12 left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-sky-200 to-sky-100"></div>
+            
+            <div className="space-y-16 md:space-y-24">
+              {steps.map((step, index) => (
+                <motion.div 
+                  key={index}
+                  variants={item}
+                  className={`relative flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-12`}
+                >
+                  {/* Step Number Badge */}
+                  <div className="relative z-10 flex-shrink-0 w-24 h-24 rounded-full bg-white border-4 border-sky-100 shadow-lg flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white font-bold text-2xl shadow-md">
                       {step.number}
                     </div>
                   </div>
-                </div>
+                  
+                  {/* Connecting line for mobile */}
+                  <div className="md:hidden absolute top-24 left-1/2 transform -translate-x-1/2 h-8 w-0.5 bg-sky-200"></div>
 
-                {/* Step Content */}
-                <div className="md:w-1/2">
-                  <div className="bg-white rounded-xl p-6 border border-sky-100 shadow-sm">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                    <p className="text-lg text-gray-700 mb-4">{step.description}</p>
-                    <p className="text-gray-600 mb-6">{step.details}</p>
+                  <div className="flex-1 bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="p-3 rounded-lg bg-sky-50 text-sky-600">
+                        {step.icon}
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-gray-900">{step.title}</h3>
+                    </div>
+                    <p className="text-lg text-gray-600 mb-4">{step.description}</p>
+                    <p className="text-gray-500">{step.details}</p>
                     
-                    {/* Step Image */}
-                    <div className="rounded-lg overflow-hidden mb-4">
-                      <img
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full h-48 object-cover hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
+                    {/* Step indicator for desktop */}
+                    <div className="hidden md:block absolute top-12 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-sky-500 rounded-full border-4 border-white shadow-lg"></div>
+                  </div>  
 
-                    <div className="flex items-center text-sky-600 font-semibold">
-                      <CheckCircle className="h-5 w-5 mr-2" />
-                      <span>No action required from you at this step</span>
-                    </div>
+                  {/* Step Image */}
+                  <div className="w-full md:w-5/12 lg:w-1/3 rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+                    <img 
+                      src={step.image} 
+                      alt={step.title}
+                      className="w-full h-64 md:h-80 object-cover"
+                    />
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -381,12 +408,5 @@ const HowItWorks = () => {
     </div>
   );
 };
-
-// Helper component for alert triangle icon
-const AlertTriangle = ({ className }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.998-.833-2.732 0L4.342 16.5c-.77.833.192 2.5 1.732 2.5z" />
-  </svg>
-);
 
 export default HowItWorks;

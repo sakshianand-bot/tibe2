@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../routes/routes.config';
-import Logo from '../assets/logo.jpeg';
+import Logo from '../assets/Tiberius-ezgif.com-png-to-webp-converter.webp';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,11 +24,14 @@ const Navbar = () => {
     position: 'sticky',
     top: '0',
     zIndex: '50',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+    transition: 'all 0.3s ease',
   };
 
   const mobileMenuStyles = {
     background: 'linear-gradient(to bottom, rgba(10, 25, 47, 0.98), rgba(26, 54, 93, 0.98))',
+    backdropFilter: 'blur(10px)',
     borderTop: '1px solid rgba(255, 255, 255, 0.1)'
   };
 
@@ -39,16 +42,18 @@ const Navbar = () => {
 
   return (
     <nav style={navStyles}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+      <div className="w-full mx-auto px-2 sm:px-4 py-1">
+        <div className="flex justify-between items-center h-24">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3 group">
-              <img 
-                src={Logo} 
-                alt="Tiberius Strategies Logo" 
-                className="h-10 w-auto transition-transform duration-300 group-hover:scale-110"
-              />
+              <div className="flex items-center justify-center">
+                <img 
+                  src={Logo} 
+                  alt="Tiberius Strategies"
+                  className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
               <span 
                 className="ml-3 text-xl font-bold hidden sm:inline"
                 style={{
