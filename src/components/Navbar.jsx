@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../routes/routes.config';
-import Logo from '/images/Tiberius-ezgif.com-png-to-webp-converter.webp';
+import Logo from '/images/1000073630-removebg-preview.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,11 +50,11 @@ const Navbar = () => {
                 <img 
                   src={Logo} 
                   alt="Tiberius Strategies"
-                  className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="h-28 md:h-32 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <span 
-                className="ml-3 text-xl font-bold hidden sm:inline"
+                className="ml-3 text-xl font-semibold italic hidden sm:inline"
                 style={{
                   background: 'linear-gradient(to right, #ffffff, #dbeafe)',
                   WebkitBackgroundClip: 'text',

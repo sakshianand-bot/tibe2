@@ -243,25 +243,18 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-start overflow-hidden bg-navy-900 pt-4">
         {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              opacity: 0.9
-            }}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="absolute inset-0 w-full h-full object-cover"
           >
             <source src="/videos/sa2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-200/40 via-sky-300/35 to-sky-400/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 w-full pt-4 pb-12 text-center">
@@ -280,8 +273,7 @@ const Home = () => {
 
               {/* Subheadline */}
               <div className="relative inline-block mb-4 max-w-2xl mx-auto">
-                <div className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-lg -m-2" />
-                <p className="text-xl text-white font-medium relative z-10 p-4 text-center">
+                <p className="text-xl text-white font-medium p-4 text-center italic">
                   If your home went through foreclosure or tax sale, you could be owed thousands in surplus funds. We've helped recover over $50M for homeowners just like you.
                 </p>
               </div>
@@ -297,10 +289,11 @@ const Home = () => {
                 </button>
                 <a
                   href="tel:1-800-399-0132"
-                  className="bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
+                  className="bg-gradient-to-r from-blue-600/70 via-blue-700/70 to-blue-800/70 hover:from-blue-500/70 hover:to-blue-700/70 text-white font-semibold py-4 px-8 rounded-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 group relative overflow-hidden"
                 >
-                  <Phone className="h-5 w-5" />
-                  <span className="font-semibold">(800) 399-0132</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Phone className="h-5 w-5 group-hover:scale-110 transition-transform z-10" />
+                  <span className="text-lg font-medium z-10">(800) 399-0132</span>
                 </a>
               </div>
 
@@ -468,78 +461,37 @@ const Home = () => {
 
             {/* Coverage Details */}
             <div className="space-y-8">
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-sky-100">
-                <div className="flex items-start space-x-4 mb-6">
-                  <div className="w-14 h-14 bg-gradient-to-br from-sky-50 to-sky-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg className="w-7 h-7 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-navy-900 mb-2">Complete Coverage</h3>
-                    <p className="text-navy-700">
-                      Our team operates in every state, with local expertise in all 50 states' foreclosure and tax sale laws.
-                    </p>
+              <div className="bg-white rounded-2xl p-6 shadow-md border border-sky-100 h-full flex flex-col min-h-[350px]">
+                <div className="flex-1">
+                  <div className="flex items-start space-x-6 mb-10">
+                    <div className="w-14 h-14 bg-gradient-to-br from-sky-50 to-sky-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <svg className="w-7 h-7 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-2xl font-bold text-navy-900 mb-3">Complete Coverage</h3>
+                      <p className="text-navy-700 leading-relaxed">
+                        Our team operates in every state, with local expertise in all 50 states' foreclosure and tax sale laws.
+                      </p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-sky-50 rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-sky-700 mb-1">50</div>
-                    <div className="text-sm font-medium text-sky-800">States</div>
+                <div className="grid grid-cols-2 gap-6 mt-8">
+                  <div className="bg-sky-50 rounded-xl p-6 text-center hover:bg-sky-100 transition-all duration-300 hover:shadow-lg">
+                    <div className="text-4xl font-bold text-sky-700 mb-2">50</div>
+                    <div className="text-base font-semibold text-sky-800">States</div>
                   </div>
-                  <div className="bg-sky-50 rounded-lg p-4 text-center">
-                    <div className="text-3xl font-bold text-sky-700 mb-1">3,000+</div>
-                    <div className="text-sm font-medium text-sky-800">Counties</div>
+                  <div className="bg-sky-50 rounded-xl p-5 text-center hover:bg-sky-100 transition-colors duration-300">
+                    <div className="text-4xl font-bold text-sky-700 mb-2">3,000+</div>
+                    <div className="text-base font-semibold text-sky-800">Counties</div>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                {[
-                  {
-                    icon: <svg className="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>,
-                    text: "Expert knowledge of each state's surplus fund laws"
-                  },
-                  {
-                    icon: <svg className="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>,
-                    text: "Local attorneys and experts nationwide"
-                  },
-                  {
-                    icon: <svg className="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>,
-                    text: "Successful recoveries in every region"
-                  },
-                  {
-                    icon: <svg className="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>,
-                    text: "No location restrictions - we come to you"
-                  }
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className="w-8 h-8 bg-sky-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                      {item.icon}
-                    </div>
-                    <p className="text-navy-700">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-gradient-to-r from-sky-50 to-blue-50 rounded-xl p-6 border border-sky-200">
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">
-                    <Phone className="w-5 h-5 text-sky-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-navy-900">No Matter Where You Are</h4>
-                    <p className="text-sm text-navy-700">We can help you recover surplus funds from anywhere in the US</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setShowModal(true)}
-                  className="w-full bg-gradient-to-r from-sky-600 to-sky-700 text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  Check Eligibility in Your State
-                </button>
               </div>
             </div>
           </div>

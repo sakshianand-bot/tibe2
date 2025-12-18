@@ -48,7 +48,8 @@ const WhyChooseUs = () => {
       title: "Fast, Efficient, and Reliable",
       description: "We understand the urgency — surplus funds are time-sensitive. We act quickly to ensure you don't miss claim deadlines.",
       highlight: "Time-Sensitive Action",
-      color: "bg-blue-700"
+      color: "bg-blue-700",
+      image: "/images/trust-word-made-with-wooden-blocks.webp"
     }
   ];
 
