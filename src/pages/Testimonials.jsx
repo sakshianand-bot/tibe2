@@ -113,34 +113,28 @@ const Testimonials = () => {
         <div className="mb-20">
           <div className="space-y-6">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="grid md:grid-cols-1 gap-4 p-6">
-                  {/* Avatar Only */}
-                  <div className="md:col-span-1 flex justify-center">
-                    <div className="flex-shrink-0">
-                      <img 
-                        src={testimonial.avatar} 
-                        alt="Client"
-                        className="w-16 h-16 rounded-full object-cover border-2 border-sky-500/30 shadow-lg"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Testimonial Content */}
-                  <div className="col-span-1">
+              <div key={testimonial.id} className="relative rounded-2xl overflow-hidden group">
+                {/* Glass background with gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl group-hover:border-sky-400/30 transition-all duration-500"></div>
+                
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-sky-900/10 via-transparent to-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Content */}
+                <div className="relative p-8">
+                  <div className="w-full">
                     <div className="relative h-full">
-                      <Quote className="absolute -top-2 -left-2 w-8 h-8 text-gray-700 opacity-50" />
-                      <div className="pl-4">
-                        <h3 className="text-xl font-bold text-white mb-3">
+                      <Quote className="absolute -top-2 left-0 w-8 h-8 text-sky-400/50 group-hover:text-sky-300/70 transition-colors duration-300" />
+                      <div className="pl-10">
+                        <h3 className="text-xl font-bold text-white mb-4 group-hover:text-sky-200 transition-colors duration-300">
                           {testimonial.title}
                         </h3>
-                        <p className="text-sm text-gray-300 leading-relaxed line-clamp-4">
+                        <p className="text-gray-300/90 leading-relaxed group-hover:text-gray-100 transition-colors duration-300">
                           {testimonial.content}
                         </p>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             ))}
