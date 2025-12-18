@@ -45,7 +45,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-24">
           {/* Logo Section */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-3 group">
+            <Link to="/" className="flex items-center space-x-2 group">
               <div className="flex items-center justify-center">
                 <img 
                   src={Logo} 
@@ -54,7 +54,7 @@ const Navbar = () => {
                 />
               </div>
               <span 
-                className="ml-3 text-xl font-semibold italic hidden sm:inline"
+                className="text-xl font-semibold italic hidden sm:inline"
                 style={{
                   background: 'linear-gradient(to right, #ffffff, #dbeafe)',
                   WebkitBackgroundClip: 'text',

@@ -72,16 +72,6 @@ const Testimonials = () => {
     { value: "50 States", label: "Nationwide Coverage", icon: <Users className="w-5 h-5" /> }
   ];
 
-  const StarRating = ({ rating }) => (
-    <div className="flex items-center gap-1">
-      {[...Array(5)].map((_, i) => (
-        <Star 
-          key={i} 
-          className={`w-4 h-4 ${i < rating ? 'fill-sky-400 text-sky-400' : 'text-gray-300'}`} 
-        />
-      ))}
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800 py-12 px-4 sm:px-6 lg:px-8">
@@ -125,24 +115,14 @@ const Testimonials = () => {
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl overflow-hidden border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="grid md:grid-cols-1 gap-4 p-6">
-                  {/* Author Info - Left Column */}
-                  <div className="md:col-span-1">
-                    <div className="flex items-center gap-4">
-                      <div className="flex-shrink-0">
-                        <img 
-                          src={testimonial.avatar} 
-                          alt={testimonial.author}
-                          className="w-16 h-16 rounded-full object-cover border-2 border-sky-500/30 shadow-lg"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="font-bold text-white text-lg truncate">{testimonial.author}</div>
-                        <div className="text-sm text-gray-300">{testimonial.location}</div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <StarRating rating={testimonial.rating} />
-                          <div className="text-xs text-sky-300">{testimonial.rating}.0</div>
-                        </div>
-                      </div>
+                  {/* Avatar Only */}
+                  <div className="md:col-span-1 flex justify-center">
+                    <div className="flex-shrink-0">
+                      <img 
+                        src={testimonial.avatar} 
+                        alt="Client"
+                        className="w-16 h-16 rounded-full object-cover border-2 border-sky-500/30 shadow-lg"
+                      />
                     </div>
                   </div>
 
