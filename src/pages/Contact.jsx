@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, MessageCircle, Calendar } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Clock, MessageCircle, Calendar, X } from 'lucide-react';
 
 const Contact = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 1000); // Show popup after 1 second
+
+    return () => clearTimeout(timer); // Clean up on component unmount
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -218,6 +228,26 @@ const Contact = () => {
           ></iframe>
         </div>
       </div>
+
+      {/* Popup Image */}
+      {showPopup && (
+        <div className="fixed bottom-4 right-4 z-50 animate-fade-in-up">
+          <div className="relative">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute -top-2 -right-2 bg-white text-navy-900 rounded-full w-6 h-6 flex items-center justify-center z-10 hover:bg-gray-100 transition-colors shadow-md"
+              aria-label="Close popup"
+            >
+              <X className="h-4 w-4 text-navy-900" />
+            </button>
+            <img
+              src="/images/1000073630-removebg-preview.png"
+              alt="Special Offer"
+              className="h-32 w-auto object-contain drop-shadow-lg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

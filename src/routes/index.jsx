@@ -4,6 +4,7 @@ import { ROUTES } from './routes.config';
 import MainLayout from '../layouts/MainLayout';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorBoundary from '../components/common/ErrorBoundary';
+import { ScrollToTop } from '../utils/scrollToTop';
 
 // Lazy load page components
 const Home = lazy(() => import('../pages/Home'));
@@ -28,6 +29,7 @@ const routes = [
     path: ROUTES.PUBLIC.HOME,
     element: (
       <ErrorBoundary>
+        <ScrollToTop />
         <MainLayout />
       </ErrorBoundary>
     ),

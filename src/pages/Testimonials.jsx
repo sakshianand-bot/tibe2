@@ -68,7 +68,7 @@ const Testimonials = () => {
   const stats = [
     { value: "98%", label: "Client Satisfaction", icon: <Star className="w-5 h-5" /> },
     { value: "$4.2M+", label: "Total Recovered", icon: <DollarSign className="w-5 h-5" /> },
-    { value: "3.8 months", label: "Avg. Recovery Time", icon: <FileText className="w-5 h-5" /> },
+    { value: "5 Days", label: "Avg. Recovery Time", icon: <FileText className="w-5 h-5" /> },
     { value: "50 States", label: "Nationwide Coverage", icon: <Users className="w-5 h-5" /> }
   ];
 
@@ -84,7 +84,7 @@ const Testimonials = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">
             Hear from our clients <span className="bg-gradient-to-r from-sky-600 to-sky-900 bg-clip-text text-transparent">in their own words</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Real stories from real people who've successfully recovered their surplus funds with our help.
           </p>
         </div>

@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routes.config';
-import Logo from '/images/1000073630-removebg-preview.png';
+import Logo from '/images/Tiberius_Logo-removebg-preview.png';
+import { scrollToSection } from '../utils/scrollToTop';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    // Close mobile menu if open
+    setIsOpen(false);
+    
+    // If we're already on the same page, scroll to top
+    if (location.pathname === path) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      // Otherwise, navigate to the page
+      navigate(path);
+    }
+  };
 
   const navLinks = [
     { name: 'Home', path: ROUTES.PUBLIC.HOME },
@@ -41,8 +60,8 @@ const Navbar = () => {
 
   return (
     <nav style={navStyles}>
-      <div className="w-full mx-auto px-2 sm:px-4 py-1">
-        <div className="flex justify-between items-center h-24">
+      <div className="w-full mx-auto px-2 sm:px-4 py-0">
+        <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
@@ -50,7 +69,7 @@ const Navbar = () => {
                 <img 
                   src={Logo} 
                   alt="Tiberius Strategies"
-                  className="h-28 md:h-32 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <span 
@@ -70,10 +89,10 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <Link
+              <button
                 key={link.name}
-                to={link.path}
-                className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group"
+                onClick={() => handleNavigation(link.path)}
+                className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group bg-transparent border-none cursor-pointer"
                 style={linkHoverStyles}
               >
                 <span className="text-white/85 group-hover:text-white transition-colors duration-300">
@@ -85,7 +104,7 @@ const Navbar = () => {
                     background: 'linear-gradient(to right, #60a5fa, #22d3ee)'
                   }}
                 ></span>
-              </Link>
+              </button>
             ))}
           </div>
 

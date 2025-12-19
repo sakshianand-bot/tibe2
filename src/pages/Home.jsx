@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Phone, X, CreditCard, Shield, FileText, Users, Award, Zap, Clock, DollarSign, Lock, User, ShieldCheck, FileSearch, Wallet, Handshake } from 'lucide-react';
 
 const BenefitCard = ({ icon, title, description, image, details }) => {
@@ -98,6 +98,15 @@ const BenefitCard = ({ icon, title, description, image, details }) => {
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 1000); // Show popup after 4 seconds
+
+    return () => clearTimeout(timer); // Clean up on component unmount
+  }, []);
 
   const quickBullets = [
     {
@@ -174,7 +183,26 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Popup Image */}
+      {showPopup && (
+        <div className="fixed bottom-4 right-4 z-50 animate-fade-in-up">
+          <div className="relative">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute -top-2 -right-2 bg-white text-navy-900 rounded-full w-6 h-6 flex items-center justify-center z-10 hover:bg-gray-100 transition-colors shadow-md"
+              aria-label="Close popup"
+            >
+              <X className="h-4 w-4 text-navy-900" />
+            </button>
+            <img
+              src="/images/1000073630-removebg-preview.png"
+              alt="Special Offer"
+              className="h-32 w-auto object-contain drop-shadow-lg"
+            />
+          </div>
+        </div>
+      )}
       {/* Consultation Modal */}
       {showModal && (
         <div
