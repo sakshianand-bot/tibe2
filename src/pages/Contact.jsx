@@ -22,7 +22,7 @@ const Contact = () => {
     setSubmitStatus({ success: false, message: '' });
 
     const formData = new FormData(e.target);
-    formData.append('access_key', '');
+    formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '');
     formData.append('from_name', 'Tiberius Strategies Contact Form');
     formData.append('subject', 'New Contact Form Submission');
 
