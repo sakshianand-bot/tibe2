@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Mail, Phone, MapPin, Clock, MessageCircle, Calendar, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Mail, Phone, MapPin, Clock, MessageCircle, Calendar, X, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 const Contact = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -12,25 +12,46 @@ const Contact = () => {
     return () => clearTimeout(timer); // Clean up on component unmount
   }, []);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    message: ''
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ success: false, message: '' });
+  const formRef = useRef(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus({ success: false, message: '' });
+
+    const formData = new FormData(e.target);
+    formData.append('access_key', '');
+    formData.append('from_name', 'Tiberius Strategies Contact Form');
+    formData.append('subject', 'New Contact Form Submission');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({
+          success: true,
+          message: 'Thank you for your message! We will get back to you soon.'
+        });
+        formRef.current.reset();
+      } else {
+        throw new Error(data.message || 'Something went wrong');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus({
+        success: false,
+        message: 'Failed to send message. Please try again later.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,8 +94,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Email</h3>
-                    <a href="mailto:Support@TiberiusStrategies.com" className="text-sky-600 hover:text-sky-700">
-                      Support@TiberiusStrategies.com
+                    <a href="mailto:Support@tiberiusstrategies.com" className="text-sky-600 hover:text-sky-700">
+                      Support@tiberiusstrategies.com
                     </a>
                     <p className="text-sm text-gray-500">We typically respond within 24 hours</p>
                   </div>
@@ -122,7 +143,19 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-sky-100">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {submitStatus.message && (
+              <div className={`p-4 mb-6 rounded-lg ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                <div className="flex items-start">
+                  {submitStatus.success ? (
+                    <CheckCircle className="w-5 h-5 mt-0.5 mr-2 flex-shrink-0" />
+                  ) : (
+                    <AlertCircle className="w-5 h-5 mt-0.5 mr-2 flex-shrink-0" />
+                  )}
+                  <span>{submitStatus.message}</span>
+                </div>
+              </div>
+            )}
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Full Name *
@@ -132,10 +165,8 @@ const Contact = () => {
                   id="name"
                   name="name"
                   required
-                  value={formData.name}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:outline-none transition"
-                  placeholder="John Doe"
+                  placeholder=""
                 />
               </div>
 
@@ -149,10 +180,8 @@ const Contact = () => {
                     id="email"
                     name="email"
                     required
-                    value={formData.email}
-                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:outline-none transition"
-                    placeholder="your@email.com"
+                    placeholder=""
                   />
                 </div>
 
@@ -164,10 +193,8 @@ const Contact = () => {
                     type="tel"
                     id="phone"
                     name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:outline-none transition"
-                    placeholder="(123) 456-7890"
+                    placeholder=""
                   />
                 </div>
               </div>
@@ -180,10 +207,8 @@ const Contact = () => {
                   type="text"
                   id="address"
                   name="address"
-                  value={formData.address}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:outline-none transition"
-                  placeholder="123 Main St, City, State ZIP"
+                  placeholder=""
                 />
               </div>
 
@@ -196,19 +221,25 @@ const Contact = () => {
                   name="message"
                   rows="4"
                   required
-                  value={formData.message}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:outline-none transition"
-                  placeholder="How can we help you today?"
+                  placeholder=""
                 ></textarea>
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-sky-500 to-sky-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-sky-600 hover:to-sky-700 transition-all duration-300 shadow-md flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="animate-spin mr-2 h-5 w-5" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
               </div>
             </form>

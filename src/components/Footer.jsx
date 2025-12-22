@@ -3,13 +3,11 @@ import {
   FaMapMarkerAlt, 
   FaEnvelope, 
   FaPhone, 
-  FaFacebook, 
-  FaTwitter, 
-  FaLinkedin, 
-  FaInstagram,
   FaChevronRight,
   FaClock
 } from 'react-icons/fa';
+import { ROUTES } from '../routes/routes.config';
+import { Link } from 'react-router-dom';
 import Logo from '/images/Tiberius_Logo-removebg-preview.png';
 
 const Footer = () => {
@@ -23,13 +21,6 @@ const Footer = () => {
     { name: 'FAQ', path: '/faq' },
     { name: 'Testimonials', path: '/testimonials' },
     { name: 'Contact Us', path: '/contact' }
-  ];
-
-  const socialLinks = [
-    { icon: <FaFacebook />, name: 'Facebook', url: 'https://facebook.com/tiberiusstrategies' },
-    { icon: <FaTwitter />, name: 'Twitter', url: 'https://twitter.com/tiberiusstrat' },
-    { icon: <FaLinkedin />, name: 'LinkedIn', url: 'https://linkedin.com/company/tiberius-strategies' },
-    { icon: <FaInstagram />, name: 'Instagram', url: 'https://instagram.com/tiberiusstrategies' }
   ];
 
   return (
@@ -55,21 +46,6 @@ const Footer = () => {
             <p className="text-gray-300 text-sm">
               Empowering businesses with strategic insights and innovative solutions for sustainable growth and market leadership.
             </p>
-            
-            <div className="flex space-x-4 pt-2">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors text-lg"
-                  aria-label={social.name}
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Column 2: Quick Links */}
@@ -126,7 +102,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left mb-4 md:mb-0">
               <p className="text-gray-400 text-sm">
-                © {currentYear} Tiberius Strategies. All rights reserved.
+                {currentYear} Tiberius Strategies. All rights reserved.
               </p>
             </div>
             
@@ -137,30 +113,24 @@ const Footer = () => {
               >
                 Privacy Policy
               </a>
-              <a 
-                href="/terms-of-service" 
+              <Link 
+                to={ROUTES.PUBLIC.TERMS_AND_CONDITIONS}
                 className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
               >
-                Terms of Service
-              </a>
-              <a 
-                href="/cookie-policy" 
+                Terms and Conditions
+              </Link>
+              <Link 
+                to={ROUTES.PUBLIC.COOKIE_POLICY}
                 className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
               >
                 Cookie Policy
-              </a>
-              <a 
-                href="/sitemap" 
+              </Link>
+              <Link 
+                to={ROUTES.PUBLIC.DISCLAIMER}
                 className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
               >
-                Sitemap
-              </a>
-              <a 
-                href="/accessibility" 
-                className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
-              >
-                Accessibility
-              </a>
+                Disclaimer
+              </Link>
             </div>
           </div>
           

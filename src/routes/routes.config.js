@@ -7,7 +7,11 @@ export const ROUTES = {
     FAQ: '/faq',
     TESTIMONIALS: '/testimonials',
     RESOURCES: '/resources',
-    CONTACT: '/contact'
+    CONTACT: '/contact',
+    PRIVACY_POLICY: '/privacy-policy',
+    TERMS_AND_CONDITIONS: '/terms-and-conditions',
+    COOKIE_POLICY: '/cookie-policy',
+    DISCLAIMER: '/disclaimer'
   }
   // Add AUTH and PROTECTED routes when needed
 };

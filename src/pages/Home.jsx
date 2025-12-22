@@ -220,46 +220,50 @@ const Home = () => {
               <X className="h-5 w-5" />
             </button>
 
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-r from-sky-400 to-sky-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                <CreditCard className="h-8 w-8 text-secondary-foreground" />
+            <div className="text-center relative p-6 rounded-2xl bg-white/40 backdrop-blur-sm border border-white/30 shadow-lg -mb-2">
+              <div className="absolute inset-0 bg-white/20 rounded-2xl -z-10" />
+              <div className="w-14 h-14 bg-gradient-to-r from-sky-400 to-sky-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                <CreditCard className="h-6 w-6 text-secondary-foreground" />
               </div>
-              <h3 className="text-2xl font-bold text-sky-800 mb-2">
+              <h3 className="text-xl font-bold text-sky-800 mb-1">
                 Free Case Review
               </h3>
-              <p className="text-sky-600 font-medium">
+              <p className="text-sky-600 text-sm font-medium">
                 Find out if you're owed surplus funds
               </p>
             </div>
 
-            <form className="space-y-4">
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
-              />
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
-              />
-              <input
-                type="text"
-                placeholder="Property Address (if known)"
-                className="w-full px-4 py-3 rounded-lg border border-input bg-background focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
-              />
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-sky-500/90 to-sky-600/90 backdrop-blur-sm text-secondary-foreground font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all hover:from-sky-600/90 hover:to-sky-700/90 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Submit for Free Review
-              </button>
-            </form>
+            <div className="relative p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-lg mt-6">
+              <div className="absolute inset-0 bg-white/20 rounded-2xl -z-10" />
+              <form className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-white/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
+                />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-white/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-white/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
+                />
+                <input
+                  type="text"
+                  placeholder="Property Address (if known)"
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-white/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-sky-500/90 to-sky-600/90 backdrop-blur-sm text-secondary-foreground font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all hover:from-sky-600/90 hover:to-sky-700/90 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  Submit for Free Review
+                </button>
+              </form>
+            </div>
 
             <p className="text-xs text-muted-foreground text-center mt-6">
               By submitting, you agree to our Terms and Privacy Policy

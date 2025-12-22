@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/routes.config';
 import Logo from '/images/Tiberius_Logo-removebg-preview.png';
-import { scrollToSection } from '../utils/scrollToTop';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
