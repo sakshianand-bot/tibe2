@@ -40,6 +40,10 @@ const Contact = () => {
           message: 'Thank you for your message! We will get back to you soon.'
         });
         formRef.current.reset();
+        // Clear the success message after 2 seconds
+        setTimeout(() => {
+          setSubmitStatus({ success: false, message: '' });
+        }, 2000);
       } else {
         throw new Error(data.message || 'Something went wrong');
       }
@@ -49,6 +53,10 @@ const Contact = () => {
         success: false,
         message: 'Failed to send message. Please try again later.'
       });
+      // Clear the error message after 2 seconds
+      setTimeout(() => {
+        setSubmitStatus({ success: false, message: '' });
+      }, 2000);
     } finally {
       setIsSubmitting(false);
     }
