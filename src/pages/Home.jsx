@@ -5,19 +5,71 @@ const BenefitCard = ({ icon, title, description, image, details }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <div className="p-6">
-        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-sky-100 text-sky-600 mb-4">
-          {icon}
+    <>
+      <div
+        onClick={() => setIsOpen(true)}
+        className="bg-card rounded-xl p-6 border border-navy-100 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-2 flex flex-col h-full"
+      >
+        <div className="w-14 h-14 bg-gradient-to-br from-navy-50 to-navy-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <div className="text-navy-600">
+            {icon}
+          </div>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
-        <p className="text-gray-600">{description}</p>
+        <h3 className="text-xl font-bold text-navy-900 mb-2">{title}</h3>
+        <p className="text-muted-foreground leading-relaxed flex-1">{description}</p>
+        <p className="text-sky-600 text-sm mt-3 font-medium group-hover:text-sky-700 transition-colors">
+          Click to learn more →
+        </p>
       </div>
-    </div>
+
+      {isOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            {image && (
+              <div className="w-full h-64 overflow-hidden">
+                <img 
+                  src={image} 
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-xl font-bold text-navy-900">{title}</h3>
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              <p className="text-gray-700 mb-4">{description}</p>
+              <ul className="space-y-2 mb-6">
+                {details.map((detail, i) => (
+                  <li key={i} className="flex items-start">
+                    <span className="text-sky-500 mr-2">•</span>
+                    <span className="text-gray-700">{detail}</span>
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="w-full bg-sky-600 text-white py-2 px-4 rounded-lg hover:bg-sky-700 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ success: false, message: '' });
   const formRef = useRef(null);
@@ -29,7 +81,7 @@ const Home = () => {
 
     const formData = new FormData(e.target);
     formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '');
-    formData.append('from_name', 'Tiberius Strategies - Free Case Review');
+    formData.append('from_name', 'Tiberius Strategies Free Case Review');
     formData.append('subject', 'New Free Case Review Submission');
 
     try {
@@ -43,9 +95,12 @@ const Home = () => {
       if (data.success) {
         setSubmitStatus({
           success: true,
-          message: 'Thank you for your submission! We will review your case and get back to you soon.',
+          message: 'Thank you for your submission! We will review your case and get back to you soon.'
         });
         formRef.current?.reset();
+        setTimeout(() => {
+          setSubmitStatus({ success: false, message: '' });
+        }, 3000);
       } else {
         throw new Error(data.message || 'Something went wrong');
       }
@@ -53,15 +108,12 @@ const Home = () => {
       console.error('Error submitting form:', error);
       setSubmitStatus({
         success: false,
-        message: 'Failed to submit your case. Please try again later.',
+        message: 'Failed to submit your request. Please try again later.'
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  const [showModal, setShowModal] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -72,11 +124,73 @@ const Home = () => {
   }, []);
 
   const quickBullets = [
-    // ... (rest of the code remains the same)
+    {
+      icon: <FileSearch className="h-6 w-6" />,
+      title: "Expert Recovery",
+      text: "Nationwide surplus-fund recovery via experienced professionals"
+    },
+    {
+      icon: <FileText className="h-6 w-6" />,
+      title: "Full-Service",
+      text: "We handle research, paperwork, filings — you get paid, hassle-free"
+    },
+    {
+      icon: <DollarSign className="h-6 w-6" />,
+      title: "No Preliminary Fees",
+      text: "Advance charges are absent — we charge only if your funds are successfully recovered"
+    },
+    {
+      icon: <ShieldCheck className="h-6 w-6" />,
+      title: "Trusted Partner",
+      text: "Transparent, ethical, and client-first approach"
+    }
   ];
 
   const benefits = [
-    // ... (rest of the code remains the same)
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: "Fast Processing",
+      description: "Quick and efficient processing to get your funds as soon as possible",
+      image: "/images/s4.webp",
+      details: [
+        "Expedited claim processing",
+        "Direct communication with our team",
+        "Regular updates on your case status"
+      ]
+    },
+    {
+      icon: <FileText className="h-6 w-6" />,
+      title: "Paperwork Handled",
+      description: "We handle all the complex paperwork and legal procedures",
+      image: "/images/s5.webp",
+      details: [
+        "Document preparation and filing",
+        "Legal expertise on your side",
+        "No need to navigate complex forms"
+      ]
+    },
+    {
+      icon: <Wallet className="h-6 w-6" />,
+      title: "No Upfront Cost",
+      description: "Pay nothing until we successfully recover your funds",
+      image: "/images/s6.webp",
+      details: [
+        "No hidden fees",
+        "Success-based payment",
+        "Free initial consultation"
+      ]
+    },
+    {
+      icon: <Lock className="h-6 w-6" />,
+      title: "Bank-Level Security",
+      description: "Your information is protected with bank-level security",
+      image: "/images/s7.webp",
+      details: [
+        "256-bit encryption",
+        "Secure document handling",
+        "Strict privacy policies"
+      ]
+    }
   ];
 
   return (
@@ -132,19 +246,19 @@ const Home = () => {
 
             <div className="relative p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-lg mt-6">
               <div className="absolute inset-0 bg-white/20 rounded-2xl -z-10" />
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {submitStatus.message && (
-                  <div className={`p-3 mb-4 rounded-lg text-sm ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
-                    <div className="flex items-start">
-                      {submitStatus.success ? (
-                        <CheckCircle className="w-4 h-4 mt-0.5 mr-2 flex-shrink-0" />
-                      ) : (
-                        <AlertCircle className="w-4 h-4 mt-0.5 mr-2 flex-shrink-0" />
-                      )}
-                      <span>{submitStatus.message}</span>
-                    </div>
+              {submitStatus.message && (
+                <div className={`p-4 mb-4 rounded-lg ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                  <div className="flex items-start">
+                    {submitStatus.success ? (
+                      <CheckCircle className="w-5 h-5 mt-0.5 mr-2 flex-shrink-0" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 mt-0.5 mr-2 flex-shrink-0" />
+                    )}
+                    <span>{submitStatus.message}</span>
                   </div>
-                )}
+                </div>
+              )}
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                 <input
                   type="text"
                   name="name"
@@ -163,6 +277,7 @@ const Home = () => {
                   type="tel"
                   name="phone"
                   placeholder="Phone Number"
+                  required
                   className="w-full px-4 py-3 rounded-lg border border-input bg-white/50 focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"
                 />
                 <input
@@ -174,7 +289,7 @@ const Home = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-sky-500 to-sky-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-sky-600 hover:to-sky-700 transition-all duration-300 shadow-md mt-2 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-sky-500/90 to-sky-600/90 backdrop-blur-sm text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transition-all hover:from-sky-600/90 hover:to-sky-700/90 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {isSubmitting ? (
                     <>
@@ -182,7 +297,7 @@ const Home = () => {
                       Submitting...
                     </>
                   ) : (
-                    'Submit for Review'
+                    'Submit for Free Review'
                   )}
                 </button>
               </form>
