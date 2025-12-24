@@ -6,6 +6,7 @@ import {
   FaChevronRight,
   FaClock
 } from 'react-icons/fa';
+import { Mail } from 'lucide-react';
 import { ROUTES } from '../routes/routes.config';
 import { Link } from 'react-router-dom';
 import Logo from '/images/Tiberius_Logo-removebg-preview.png';
@@ -83,6 +84,32 @@ const Footer = () => {
                 </div>
               </div>
               
+              <div className="flex items-start">
+                <FaEnvelope className="mr-3 text-blue-400 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-gray-300 font-medium">Email</p>
+                  <a 
+                    href="mailto:Support@tiberiusstrategies.com" 
+                    className="text-sky-500 hover:text-sky-400 text-sm transition-colors"
+                  >
+                    Support@tiberiusstrategies.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <FaPhone className="mr-3 text-blue-400 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-gray-300 font-medium">Phone</p>
+                  <a 
+                    href="tel:+12065551234" 
+                    className="text-sky-500 hover:text-sky-400 text-sm transition-colors"
+                  >
+                    (206) 555-1234
+                  </a>
+                </div>
+              </div>
+              
               <div className="flex items-start pt-2">
                 <FaClock className="mr-3 text-blue-400 mt-1 flex-shrink-0" />
                 <div>
@@ -132,6 +159,27 @@ const Footer = () => {
                 Disclaimer
               </Link>
             </div>
+          </div>
+          
+          {/* Contact Links */}
+          <div className="flex flex-col items-center space-y-4 mt-6">
+            {/* Email */}
+            <a 
+              href="mailto:Support@tiberiusstrategies.com" 
+              className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+            >
+              <Mail className="w-4 h-4 mr-2" />
+              Support@tiberiusstrategies.com
+            </a>
+            
+            {/* Phone */}
+            <a 
+              href="tel:+12065551234" 
+              className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+            >
+              <FaPhone className="w-4 h-4 mr-2" />
+              (206) 555-1234
+            </a>
           </div>
           
           {/* Disclaimer */}
