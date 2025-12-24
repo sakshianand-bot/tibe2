@@ -383,14 +383,18 @@ const HowItWorks = () => {
               <Search className="h-5 w-5" />
               <span>Free Claim Search</span>
             </motion.button>
-            <motion.button
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-white/30 text-white font-medium rounded-xl hover:bg-white/10 backdrop-blur-sm flex items-center space-x-2"
             >
-              <Phone className="h-5 w-5" />
-              <span>Call Now: 1-800-SURPLUS</span>
-            </motion.button>
+              <a 
+                href="tel:18002256920"
+                className="px-8 py-4 border-2 border-white/30 text-white font-medium rounded-xl hover:bg-white/10 backdrop-blur-sm flex items-center space-x-2"
+              >
+                <Phone className="h-5 w-5" />
+                <span>Call Now: (800) 225-6920</span>
+              </a>
+            </motion.div>
           </motion.div>
 
           <motion.div
