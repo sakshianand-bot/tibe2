@@ -1,5 +1,26 @@
-import React, { useMemo, memo, useCallback } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 
+// Add global styles for performance optimization
+const globalStyles = `
+  .optimize-scroll {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+`;
+
+// Add styles to head
+if (typeof document !== 'undefined') {
+  const style = document.createElement('style');
+  style.textContent = globalStyles;
+  document.head.appendChild(style);
+}
+
+// Move static data outside the component
 const SERVICES = [
   {
     title: "Foreclosure & Tax-Sale Surplus Fund Recovery",
@@ -83,34 +104,41 @@ const PROCESS_STEPS = [
   { step: "4", title: "Fund Recovery", desc: "We secure the release of your funds and ensure you receive payment." }
 ];
 
+// Extract repeated styles
+const gradientText = "bg-gradient-to-r from-sky-600 to-sky-800 bg-clip-text text-transparent";
+const commonButtonStyles = "font-semibold py-3 px-8 rounded-full transition-colors duration-300 text-lg";
+
 const ServiceCard = memo(({ service }) => {
-  const isEvaluation = service.title === 'Free Case Evaluation';
-  const backgroundStyle = {
-    backgroundImage: `url(${service.backgroundImage || service.icon})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    filter: isEvaluation ? 'brightness(0.8) contrast(1.2)' : 'brightness(0.9) contrast(1.1)',
-    transform: isEvaluation ? 'scale(1.05)' : 'none',
-  };
+  const cardRef = useRef(null);
+  const { title, backgroundImage, icon, features, isSearchCard, description } = service;
+  const isEvaluation = title === 'Free Case Evaluation';
+  const bgImage = backgroundImage || icon;
 
   return (
     <div 
-      className="relative rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group h-full flex flex-col"
+      ref={cardRef}
+      className="relative rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group h-full flex flex-col optimize-scroll preserve-3d"
       role="article"
-      aria-label={`Service: ${service.title}`}
+      aria-label={`Service: ${title}`}
+      style={{
+        contentVisibility: 'auto',
+        contain: 'content',
+        willChange: 'transform, opacity'
+      }}
     >
       <div 
-        className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105"
-        style={backgroundStyle}
+        className={`absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105 
+          ${isEvaluation ? 'brightness-80 contrast-120 scale-105' : 'brightness-90 contrast-110'}`}
+        style={{ backgroundImage: `url(${bgImage})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-sky-900/80 via-sky-800/40 to-sky-900/80" />
       </div>
       
       <div className="relative z-10 flex-1 flex flex-col h-full">
-        <div className={`p-6 text-center flex-1 flex flex-col items-center justify-center ${service.isSearchCard ? 'py-12' : 'py-8'}`}>
+        <div className={`p-6 text-center flex-1 flex flex-col items-center justify-center ${isSearchCard ? 'py-12' : 'py-8'}`}>
           <div className="w-16 h-16 mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30 shadow-lg">
             <img 
-              src={service.icon} 
+              src={icon} 
               alt="" 
               width={40}
               height={40}
@@ -119,18 +147,18 @@ const ServiceCard = memo(({ service }) => {
             />
           </div>
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 px-4">
-            {service.title}
+            {title}
           </h3>
         </div>
         <div className="p-6 pt-0 flex-1 flex flex-col">
           <p className="text-sky-100 mb-6 leading-relaxed flex-grow text-center">
-            {service.description}
+            {description}
           </p>
           <div className="space-y-3">
             <div className="mt-4">
               <h4 className="font-semibold text-sky-100 text-center mb-3">What We Provide:</h4>
               <div className="grid gap-2">
-                {service.features.map((feature, idx) => (
+                {features.map((feature, idx) => (
                   <div key={idx} className="flex items-start bg-black/20 backdrop-blur-sm rounded-lg p-2 border border-white/10">
                     <div className="flex-shrink-0 mt-1">
                       <div className="w-2 h-2 bg-sky-300 rounded-full mt-1.5"></div>
@@ -151,22 +179,40 @@ const ServiceCard = memo(({ service }) => {
 
 ServiceCard.displayName = 'ServiceCard';
 
-const Services = () => {
-  // Memoize the services array to prevent recreation on re-renders
-  const services = useMemo(() => SERVICES, []);
+const ProcessStep = memo(({ step, title, description }) => (
+  <div className="text-center" role="listitem">
+    <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <span className="text-2xl font-bold text-sky-700">{step}</span>
+    </div>
+    <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+    <p className="text-sky-600">{description}</p>
+  </div>
+));
 
-  // Memoize the service card render function
-  const renderServiceCard = useCallback((service) => (
-    <ServiceCard key={service.title} service={service} />
-  ), []);
+const Services = memo(function Services() {
+  const servicesRef = useRef(null);
+  const processRef = useRef(null);
+  const ctaRef = useRef(null);
+
+  // Memoize event handlers
+  const handleStartEvaluation = () => {
+    // Handle evaluation start
+  };
+
+  const handleViewCases = () => {
+    // Handle view cases
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-sky-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div 
+      className="min-h-screen bg-gradient-to-b from-white to-sky-50 py-12 px-4 sm:px-6 lg:px-8 optimize-scroll"
+      style={{ contentVisibility: 'auto' }}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="bg-gradient-to-r from-sky-600 to-sky-800 bg-clip-text text-transparent">Services</span>
+            Our <span className={gradientText}>Services</span>
           </h1>
           <p className="text-xl text-sky-600 max-w-3xl mx-auto">
             Comprehensive surplus fund recovery solutions designed to maximize your claim's success 
@@ -175,31 +221,45 @@ const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" role="list">
-          {services.map(renderServiceCard)}
+        <div 
+          ref={servicesRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 optimize-scroll" 
+          role="list"
+          style={{ contentVisibility: 'auto' }}
+        >
+          {SERVICES.map((service) => (
+            <ServiceCard key={service.title} service={service} />
+          ))}
         </div>
 
         {/* Process Section */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-16 border border-sky-100">
+        <div 
+          ref={processRef}
+          className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-16 border border-sky-100 optimize-scroll"
+          style={{ contentVisibility: 'auto' }}
+        >
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Our <span className="bg-gradient-to-r from-sky-600 to-sky-800 bg-clip-text text-transparent">4-Step</span> Recovery Process
+            Our <span className={gradientText}>4-Step</span> Recovery Process
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {PROCESS_STEPS.map((process) => (
-              <div key={process.step} className="text-center" role="listitem">
-                <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-sky-700">{process.step}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{process.title}</h3>
-                <p className="text-sky-600">{process.desc}</p>
-              </div>
+            {PROCESS_STEPS.map((step) => (
+              <ProcessStep 
+                key={step.step}
+                step={step.step}
+                title={step.title}
+                description={step.desc}
+              />
             ))}
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="text-center">
+        <div 
+          ref={ctaRef}
+          className="text-center optimize-scroll"
+          style={{ contentVisibility: 'auto' }}
+        >
           <div className="inline-block bg-gradient-to-r from-sky-600 via-sky-700 to-sky-800 rounded-full p-1 mb-8">
             <div className="bg-white rounded-full px-8 py-4">
               <h3 className="text-2xl font-bold text-gray-900">
@@ -213,10 +273,16 @@ const Services = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-sky-600 to-sky-800 text-white font-semibold py-3 px-8 rounded-full hover:from-sky-700 hover:to-sky-900 transition-colors duration-300 text-lg shadow-lg hover:shadow-xl">
+            <button 
+              onClick={handleStartEvaluation}
+              className={`bg-gradient-to-r from-sky-600 to-sky-800 text-white ${commonButtonStyles} hover:from-sky-700 hover:to-sky-900 shadow-lg hover:shadow-xl`}
+            >
               Start Free Evaluation
             </button>
-            <button className="bg-white text-sky-700 font-semibold py-3 px-8 rounded-full hover:bg-sky-50 transition-colors duration-300 text-lg border-2 border-sky-600">
+            <button 
+              onClick={handleViewCases}
+              className={`bg-white text-sky-700 border-2 border-sky-600 ${commonButtonStyles} hover:bg-sky-50`}
+            >
               View Sample Cases
             </button>
           </div>
@@ -231,6 +297,9 @@ const Services = () => {
       </div>
     </div>
   );
-};
+});
+
+// Add display name for better debugging
+Services.displayName = 'Services';
 
 export default Services;
