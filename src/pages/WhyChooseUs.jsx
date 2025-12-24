@@ -179,7 +179,7 @@ const WhyChooseUs = () => {
                 <ArrowRight className="w-5 h-5" />
               </button>
               <button className="bg-transparent border-2 border-white text-white font-semibold py-4 px-10 rounded-full hover:bg-white/20 transition-all duration-300 text-lg">
-                Call (555) 123-4567
+                Call (888) 225-6920
               </button>
             </div>
             

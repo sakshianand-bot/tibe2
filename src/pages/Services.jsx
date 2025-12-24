@@ -11,8 +11,8 @@ const Services = () => {
         "Tax-sale surplus recovery",
         "Auction analysis and tracking"
       ],
-      icon: "https://images.unsplash.com/photo-1554224155-3a58922a22c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      backgroundPosition: "center 30%"
+      icon: "/images/unrecognizable-man-filling-application-form.webp",
+      backgroundPosition: "center center"
     },
     {
       title: "Full Claim Filing & Legal Representation",
@@ -23,8 +23,9 @@ const Services = () => {
         "Government agency liaison",
         "Ongoing case management"
       ],
-      icon: "https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=90",
-      backgroundPosition: "center 60%"
+      icon: "/images/top-view-career-guidance-items-judges.webp",
+      backgroundImage: "/images/top-view-career-guidance-items-judges.webp",
+      backgroundPosition: "center center"
     },
     {
       title: "Nationwide Record Audit & Search",
@@ -35,9 +36,10 @@ const Services = () => {
         "Public records audit",
         "Systematic search protocols"
       ],
-      icon: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=90",
+      icon: "/images/photorealistic-earth-planet.webp",
+      backgroundImage: "/images/photorealistic-earth-planet.webp",
       isSearchCard: true,
-      backgroundPosition: "center 50%"
+      backgroundPosition: "center center"
     },
     {
       title: "Heir & Beneficiary Claims",
@@ -48,8 +50,9 @@ const Services = () => {
         "Beneficiary verification",
         "Probate claim support"
       ],
-      icon: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-      backgroundPosition: "center 50%"
+      icon: "/images/group-positive-young-women-cheering-together.webp",
+      backgroundImage: "/images/group-positive-young-women-cheering-together.webp",
+      backgroundPosition: "center center"
     },
     {
       title: "Estate & Probate Assistance",
@@ -60,7 +63,9 @@ const Services = () => {
         "Estate claim facilitation",
         "Document coordination"
       ],
-      icon: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8RXN0YXRlfGVufDB8fDB8fHww",
+      icon: "/images/vertical-low-angle-shot-modern-glass-business-buildings-touching-sky.webp",
+      backgroundImage: "/images/vertical-low-angle-shot-modern-glass-business-buildings-touching-sky.webp",
+      backgroundPosition: "center center"
     },
     {
       title: "Free Case Evaluation",
@@ -71,8 +76,9 @@ const Services = () => {
         "Recovery potential estimate",
         "Clear action plan"
       ],
-      icon: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      backgroundPosition: "center 40%"
+      icon: "/images/front-view-lawyer-portrait.webp",
+      backgroundImage: "/images/front-view-lawyer-portrait.webp",
+      backgroundPosition: "center center"
     }
   ];
 
@@ -101,7 +107,7 @@ const Services = () => {
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105"
                 style={{ 
-                  backgroundImage: `url(${service.icon})`,
+                  backgroundImage: `url(${service.backgroundImage || service.icon})`,
                   backgroundSize: service.title === 'Free Case Evaluation' ? 'cover' : 'cover',
                   backgroundPosition: service.backgroundPosition || 'center',
                   filter: service.title === 'Free Case Evaluation' ? 'brightness(0.8) contrast(1.2)' : 'brightness(0.9) contrast(1.1)',

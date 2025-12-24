@@ -363,7 +363,7 @@ const Home = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <Phone className="h-5 w-5 group-hover:scale-110 transition-transform z-10" />
-                  <span className="text-lg font-medium z-10">(800) 399-0132</span>
+                  <span className="text-lg font-medium z-10">(800) 225-6920</span>
                 </a>
               </div>
 

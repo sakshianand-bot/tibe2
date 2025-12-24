@@ -327,11 +327,11 @@ const FAQ = () => {
                       Email Support
                     </a>
                     <a
-                      href="tel:15551234567"
+                      href="tel:8882256920"
                       className="flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 rounded-xl text-white font-medium transition-all hover:shadow-lg hover:-translate-y-0.5 shadow-sky-100"
                     >
                       <Phone className="w-5 h-5" />
-                      Call (555) 123-4567
+                      Call (888) 225-6920
                     </a>
                   </div>
                 </div>
