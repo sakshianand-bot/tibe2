@@ -48,7 +48,7 @@ const HowItWorks = () => {
       title: "We Research & Locate",
       description: "We audit foreclosure and tax-sale records nationwide to find properties sold for more than what was owed.",
       details: "Using proprietary databases and public records, we identify cases where surplus funds (overage) may exist for former owners or heirs. Our team covers all 50 states, ensuring no potential claim goes unnoticed.",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "/images/reading-night.webp"
     },
     {
       number: 2,
@@ -56,7 +56,7 @@ const HowItWorks = () => {
       title: "We Verify & Contact You",
       description: "If we find a potential match, we reach out to verify you're the rightful claimant.",
       details: "We check ownership history, liens, and legal eligibility — ensuring there's a valid claim before proceeding. Our verification process protects both you and us from fraudulent claims.",
-      image: "https://plus.unsplash.com/premium_photo-1684341008385-31d2eb4f3afe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VmVyaWZ5fGVufDB8fDB8fHww"
+      image: "/images/standard-quality-control-collage.webp"
     },
     {
       number: 3,
@@ -64,7 +64,7 @@ const HowItWorks = () => {
       title: "We Handle the Paperwork & Legal Filing",
       description: "Our team prepares and files all necessary documents with trustees, courts, or government agencies.",
       details: "We handle the complex legal paperwork, court filings, and communication with agencies. Our network of vetted legal partners ensures everything is filed correctly and efficiently.",
-      image: "https://plus.unsplash.com/premium_photo-1698084059560-9a53de7b816b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGF3fGVufDB8fDB8fHww"
+      image: "/images/lawyers-handshake-agreement.webp"
     },
     {
       number: 4,
@@ -72,7 +72,7 @@ const HowItWorks = () => {
       title: "You Get Your Funds",
       description: "Once approved, we arrange for funds to be disbursed to you.",
       details: "Funds are typically sent via secure check or wire transfer. You receive your money, minus our contingency-based fee. No upfront costs, no hidden fees.",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "/images/crowd-funding-funding-give-help-nonprofit-concept.webp"
     }
   ];
 
@@ -270,7 +270,7 @@ const HowItWorks = () => {
             {/* Progress line */}
             <div className="hidden md:block absolute top-12 left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-sky-200 to-sky-100"></div>
             
-            <div className="space-y-16 md:space-y-24">
+            <div className="space-y-16 md:space-y-40">
               {steps.map((step, index) => (
                 <motion.div 
                   key={index}
@@ -302,11 +302,11 @@ const HowItWorks = () => {
                   </div>  
 
                   {/* Step Image */}
-                  <div className="w-full md:w-5/12 lg:w-1/3 rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+                  <div className="w-full md:w-5/12 lg:w-1/3 rounded-xl overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300 flex items-center justify-center bg-white">
                     <img 
                       src={step.image} 
                       alt={step.title}
-                      className="w-full h-64 md:h-80 object-cover"
+                      className="w-full h-auto max-h-80 object-contain p-4"
                     />
                   </div>
                 </motion.div>
