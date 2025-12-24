@@ -1,24 +1,5 @@
-import React, { memo, useEffect, useRef } from 'react';
-
-// Add global styles for performance optimization
-const globalStyles = `
-  .optimize-scroll {
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-`;
-
-// Add styles to head
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style');
-  style.textContent = globalStyles;
-  document.head.appendChild(style);
-}
+import React, { memo, useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 // Move static data outside the component
 const SERVICES = [
@@ -109,26 +90,48 @@ const gradientText = "bg-gradient-to-r from-sky-600 to-sky-800 bg-clip-text text
 const commonButtonStyles = "font-semibold py-3 px-8 rounded-full transition-colors duration-300 text-lg";
 
 const ServiceCard = memo(({ service }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: '100px 0px' }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
+
   const { title, backgroundImage, icon, features, isSearchCard, description } = service;
   const isEvaluation = title === 'Free Case Evaluation';
   const bgImage = backgroundImage || icon;
 
   return (
-    <div 
+    <article 
       ref={cardRef}
-      className="relative rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group h-full flex flex-col optimize-scroll preserve-3d"
-      role="article"
-      aria-label={`Service: ${title}`}
-      style={{
-        contentVisibility: 'auto',
-        contain: 'content',
-        willChange: 'transform, opacity'
-      }}
+      className={`relative rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group h-full flex flex-col will-change-transform backface-visible -webkit-backface-visible transform-gpu ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+      style={{ transition: 'opacity 0.5s ease, transform 0.5s ease' }}
+      aria-label={title}
     >
       <div 
-        className={`absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105 
-          ${isEvaluation ? 'brightness-80 contrast-120 scale-105' : 'brightness-90 contrast-110'}`}
+        className={`absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105 ${
+          isEvaluation ? 'brightness-80 contrast-120 scale-105' : 'brightness-90 contrast-110'
+        }`}
         style={{ backgroundImage: `url(${bgImage})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-sky-900/80 via-sky-800/40 to-sky-900/80" />
@@ -139,11 +142,16 @@ const ServiceCard = memo(({ service }) => {
           <div className="w-16 h-16 mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-2 border-white/30 shadow-lg">
             <img 
               src={icon} 
-              alt="" 
+              alt={`${title} icon`}
               width={40}
               height={40}
               className="w-10 h-10 object-cover rounded-full"
               loading="lazy"
+              decoding="async"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/images/placeholder-icon.png';
+              }}
             />
           </div>
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 px-4">
@@ -173,9 +181,20 @@ const ServiceCard = memo(({ service }) => {
         <div className="absolute inset-0 border-2 border-transparent group-hover:border-sky-300/50 rounded-2xl transition-all duration-300 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-400 via-sky-300 to-sky-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
-    </div>
+    </article>
   );
 });
+
+ServiceCard.propTypes = {
+  service: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    features: PropTypes.arrayOf(PropTypes.string).isRequired,
+    icon: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string,
+    isSearchCard: PropTypes.bool,
+  }).isRequired,
+};
 
 ServiceCard.displayName = 'ServiceCard';
 
@@ -189,25 +208,74 @@ const ProcessStep = memo(({ step, title, description }) => (
   </div>
 ));
 
+ProcessStep.propTypes = {
+  step: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+};
+
+ProcessStep.displayName = 'ProcessStep';
+
 const Services = memo(function Services() {
+  const [isVisible, setIsVisible] = useState({
+    services: false,
+    process: false,
+    cta: false
+  });
+
   const servicesRef = useRef(null);
   const processRef = useRef(null);
   const ctaRef = useRef(null);
 
-  // Memoize event handlers
+  useEffect(() => {
+    const handleIntersection = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = entry.target.getAttribute('data-section');
+          if (section) {
+            setIsVisible(prev => ({ ...prev, [section]: true }));
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    const refs = [
+      { ref: servicesRef, section: 'services' },
+      { ref: processRef, section: 'process' },
+      { ref: ctaRef, section: 'cta' }
+    ];
+
+    refs.forEach(({ ref, section }) => {
+      if (ref.current) {
+        ref.current.setAttribute('data-section', section);
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => {
+      refs.forEach(({ ref }) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
+    };
+  }, []);
+
   const handleStartEvaluation = () => {
-    // Handle evaluation start
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleViewCases = () => {
-    // Handle view cases
+    window.location.href = '/case-studies';
   };
 
   return (
-    <div 
-      className="min-h-screen bg-gradient-to-b from-white to-sky-50 py-12 px-4 sm:px-6 lg:px-8 optimize-scroll"
-      style={{ contentVisibility: 'auto' }}
-    >
+    <div className="min-h-screen bg-gradient-to-b from-white to-sky-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
@@ -223,9 +291,9 @@ const Services = memo(function Services() {
         {/* Services Grid */}
         <div 
           ref={servicesRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 optimize-scroll" 
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 transition-all duration-700 ${isVisible.services ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           role="list"
-          style={{ contentVisibility: 'auto' }}
+          aria-label="Our services"
         >
           {SERVICES.map((service) => (
             <ServiceCard key={service.title} service={service} />
@@ -235,8 +303,7 @@ const Services = memo(function Services() {
         {/* Process Section */}
         <div 
           ref={processRef}
-          className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-16 border border-sky-100 optimize-scroll"
-          style={{ contentVisibility: 'auto' }}
+          className={`bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-16 border border-sky-100 transition-all duration-700 ${isVisible.process ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Our <span className={gradientText}>4-Step</span> Recovery Process
@@ -257,8 +324,7 @@ const Services = memo(function Services() {
         {/* CTA Section */}
         <div 
           ref={ctaRef}
-          className="text-center optimize-scroll"
-          style={{ contentVisibility: 'auto' }}
+          className={`text-center transition-all duration-700 ${isVisible.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         >
           <div className="inline-block bg-gradient-to-r from-sky-600 via-sky-700 to-sky-800 rounded-full p-1 mb-8">
             <div className="bg-white rounded-full px-8 py-4">
@@ -275,13 +341,15 @@ const Services = memo(function Services() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={handleStartEvaluation}
-              className={`bg-gradient-to-r from-sky-600 to-sky-800 text-white ${commonButtonStyles} hover:from-sky-700 hover:to-sky-900 shadow-lg hover:shadow-xl`}
+              className={`bg-gradient-to-r from-sky-600 to-sky-800 text-white ${commonButtonStyles} hover:from-sky-700 hover:to-sky-900 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500`}
+              aria-label="Start free evaluation"
             >
               Start Free Evaluation
             </button>
             <button 
               onClick={handleViewCases}
-              className={`bg-white text-sky-700 border-2 border-sky-600 ${commonButtonStyles} hover:bg-sky-50`}
+              className={`bg-white text-sky-700 border-2 border-sky-600 ${commonButtonStyles} hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500`}
+              aria-label="View sample cases"
             >
               View Sample Cases
             </button>
@@ -302,4 +370,45 @@ const Services = memo(function Services() {
 // Add display name for better debugging
 Services.displayName = 'Services';
 
-export default Services;
+// Simple error boundary for production
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-8 text-center">
+          <div className="text-red-600 font-bold text-lg mb-2">Something went wrong</div>
+          <p className="text-gray-700">Please refresh the page or try again later.</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default function ServicesWithErrorBoundary() {
+  return (
+    <ErrorBoundary>
+      <Services />
+    </ErrorBoundary>
+  );
+}
+
+export { Services };
