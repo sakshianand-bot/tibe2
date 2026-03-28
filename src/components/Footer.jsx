@@ -101,12 +101,44 @@ const Footer = () => {
                 <FaPhone className="mr-3 text-blue-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-gray-300 font-medium">Phone</p>
-                  <a 
-                    href="tel:+12065551234" 
-                    className="text-sky-500 hover:text-sky-400 text-sm transition-colors"
-                  >
-                    (206) 555-1234
-                  </a>
+                  <div className="space-y-1">
+                    <a 
+                      href="tel:888-225-6920" 
+                      className="text-sky-500 hover:text-sky-400 text-sm transition-colors block"
+                    >
+                      (888) 225-6920
+                    </a>
+                    <a 
+                      href="tel:206-875-2651" 
+                      className="text-sky-500 hover:text-sky-400 text-sm transition-colors block"
+                    >
+                      (206) 875-2651
+                    </a>
+                    <a 
+                      href="tel:425-620-2417" 
+                      className="text-sky-500 hover:text-sky-400 text-sm transition-colors block"
+                    >
+                      (425) 620-2417
+                    </a>
+                    <a 
+                      href="tel:253-544-4781" 
+                      className="text-sky-500 hover:text-sky-400 text-sm transition-colors block"
+                    >
+                      (253) 544-4781
+                    </a>
+                    <a 
+                      href="tel:509-267-3083" 
+                      className="text-sky-500 hover:text-sky-400 text-sm transition-colors block"
+                    >
+                      (509) 267-3083
+                    </a>
+                    <a 
+                      href="tel:360-583-6776" 
+                      className="text-sky-500 hover:text-sky-400 text-sm transition-colors block"
+                    >
+                      (360) 583-6776
+                    </a>
+                  </div>
                 </div>
               </div>
               
@@ -172,14 +204,51 @@ const Footer = () => {
               Support@tiberiusstrategies.com
             </a>
             
-            {/* Phone */}
-            <a 
-              href="tel:+12065551234" 
-              className="text-sky-600 hover:text-sky-700 inline-flex items-center"
-            >
-              <FaPhone className="w-4 h-4 mr-2" />
-              (206) 555-1234
-            </a>
+            {/* Phone Numbers */}
+            <div className="space-y-2">
+              <a 
+                href="tel:888-225-6920" 
+                className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+              >
+                <FaPhone className="w-4 h-4 mr-2" />
+                (888) 225-6920
+              </a>
+              <a 
+                href="tel:206-875-2651" 
+                className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+              >
+                <FaPhone className="w-4 h-4 mr-2" />
+                (206) 875-2651
+              </a>
+              <a 
+                href="tel:425-620-2417" 
+                className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+              >
+                <FaPhone className="w-4 h-4 mr-2" />
+                (425) 620-2417
+              </a>
+              <a 
+                href="tel:253-544-4781" 
+                className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+              >
+                <FaPhone className="w-4 h-4 mr-2" />
+                (253) 544-4781
+              </a>
+              <a 
+                href="tel:509-267-3083" 
+                className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+              >
+                <FaPhone className="w-4 h-4 mr-2" />
+                (509) 267-3083
+              </a>
+              <a 
+                href="tel:360-583-6776" 
+                className="text-sky-600 hover:text-sky-700 inline-flex items-center"
+              >
+                <FaPhone className="w-4 h-4 mr-2" />
+                (360) 583-6776
+              </a>
+            </div>
           </div>
           
           {/* Disclaimer */}
